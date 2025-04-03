@@ -8,7 +8,6 @@ from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
-from agent import agent
 from server.error import init_error_handlers
 from server.middleware import init_middleware
 from server.router import router
