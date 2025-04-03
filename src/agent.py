@@ -15,7 +15,7 @@ def weather(city: str) -> str:
 async def agent(input: str) -> AsyncGenerator[str, None]:
     prompt = "You are a helpful assistant that can answer questions and help with tasks."
     tools = await bl_tools(["blaxel-search"]).to_langchain() + [weather]
-    model = await bl_model("gpt-4o-mini").to_langchain()
+    model = await bl_model("sandbox-openai").to_langchain()
     agent = create_react_agent(model=model, tools=tools, prompt=prompt)
     messages = {"messages": [("user", input)]}
     async for chunk in agent.astream(messages, stream_mode=["updates", "messages"]):
