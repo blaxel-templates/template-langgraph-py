@@ -25,7 +25,7 @@ async def agent(input: str) -> AsyncGenerator[str, None]:
             msg = stream_chunk[0]
             if msg.content:
                 if not msg.tool_calls:
-                   yield msg.content
+                    yield msg.content
         # This to show a call has been made to a tool, usefull if you want to show the tool call in your interface
         if type_ == "updates":
             if "tools" in stream_chunk:
