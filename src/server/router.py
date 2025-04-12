@@ -1,4 +1,4 @@
-from agent import agent
+from ..agent import agent
 from blaxel.instrumentation.span import SpanManager
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
