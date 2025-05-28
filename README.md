@@ -20,7 +20,7 @@ A template implementation of a conversational agent using LangGraph and GPT-4. T
 - **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
 - **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
   ```bash
-  curl -fsSL https://raw.githubusercontent.com/beamlit/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
+  curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
   ```
 - **Blaxel login:** Login to Blaxel platform
   ```bash
@@ -32,7 +32,7 @@ A template implementation of a conversational agent using LangGraph and GPT-4. T
 **Clone the repository and install dependencies:**
 
 ```bash
-git clone https://github.com/beamlit/template-langgraph-py.git
+git clone https://github.com/blaxel-ai/template-langgraph-py.git
 cd template-langgraph-py
 uv sync
 ```

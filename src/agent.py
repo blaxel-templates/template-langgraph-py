@@ -5,16 +5,26 @@ from blaxel.tools import bl_tools
 from langchain.tools import tool
 from langchain_core.messages import AIMessageChunk
 from langgraph.prebuilt import create_react_agent
+import logging
 
+logger = logging.getLogger(__name__)
 
 @tool
 def weather(city: str) -> str:
     """Get the weather in a given city"""
     return f"The weather in {city} is sunny"
 
+async def load_tools():
+    tools = []
+    try:
+        tools = await bl_tools(["blaxel-search"]).to_langchain()
+    except Exception as e:
+        logger.warning(f"'blaxel-search' is not available, you can deploy it with this command\n```\nbl apply -f .blaxel\n```")
+    return tools + [weather]
+
 async def agent(input: str) -> AsyncGenerator[str, None]:
     prompt = "You are a helpful assistant that can answer questions and help with tasks."
-    tools = await bl_tools(["blaxel-search"]).to_langchain() + [weather]
+    tools = await load_tools()
     model = await bl_model("sandbox-openai").to_langchain()
     agent = create_react_agent(model=model, tools=tools, prompt=prompt)
     messages = {"messages": [("user", input)]}
