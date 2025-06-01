@@ -4,222 +4,140 @@
   <img src="https://blaxel.ai/logo.png" alt="Blaxel" width="200"/>
 </p>
 
-<div align="center">
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)  [![GitHub Stars](https://img.shields.io/github/stars/blaxel-templates/template-langgraph-py)](https://github.com/blaxel-templates/template-langgraph-py/stargazers)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![LangGraph](https://img.shields.io/badge/LangGraph-powered-brightgreen.svg)](https://github.com/langchain-ai/langgraph)
-[![GPT-4](https://img.shields.io/badge/GPT--4-enabled-orange.svg)](https://openai.com/gpt-4)
+A template implementation of a conversational agent using LangGraph and GPT-4. This agent demonstrates interactive conversion, tool integration, and streaming responses for real-time applications.
 
-</div>
-
-A template implementation of a conversational agent using LangGraph and GPT-4. This agent demonstrates the power of LangGraph for building interactive AI agents with tool integration capabilities.
-
-## 📑 Table of Contents
+## Table of Contents
 
 - [Features](#features)
-- [Quick Start](#quick-start)
-- [Prerequisites](#prerequisites)
+- [Demo](#demo)
 - [Installation](#installation)
-- [Usage](#usage)
-  - [Running Locally](#running-the-server-locally)
-  - [Testing](#testing-your-agent)
-  - [Deployment](#deploying-to-blaxel)
-- [API Reference](#api-reference)
+- [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
-- [Examples](#examples)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
+- [Usage](#usage)
+  - [Agent Server](#agent-server)
+  - [Agent CLI](#agent-cli)
+- [API Reference](#api-reference)
+- [Contribution](#contribution)
 - [Support](#support)
 - [License](#license)
 
-## ✨ Features
+## Features
 
-- Interactive conversational interface
-- Tool integration support (including weather and search capabilities)
-- Streaming responses for real-time interaction
-- Built on LangGraph for efficient agent orchestration
-- Easy deployment and integration with Blaxel platform
+- **Interactive conversion**: integrate custom tools via LangGraph
+- **Streaming responses**: real-time output handling
+- **Extensible**: easily add new functions and capabilities
+- **Template-based**: follow LangGraph and GPT-4 best practices
 
-## 🚀 Quick Start
+## Demo
 
-For those who want to get up and running quickly:
+![Demo GIF](https://raw.githubusercontent.com/blaxel-templates/template-langgraph-py/main/demo.gif)
+
+## Installation
+
+Ensure you have Python 3.10+ installed.
 
 ```bash
 # Clone the repository
-git clone https://github.com/blaxel-ai/template-langgraph-py.git
-
-# Navigate to the project directory
+git clone https://github.com/blaxel-templates/template-langgraph-py.git
 cd template-langgraph-py
 
-# Install dependencies
-uv sync
-
-# Start the server
-bl serve --hotreload
-
-# In another terminal, test the agent
-bl chat --local blaxel-agent
+# Create virtual environment and install
+dotenv # optional: load .env variables
+python -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install .
 ```
 
-## 📋 Prerequisites
+## Quick Start
 
-- **Python:** 3.10 or later
-- **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
-- **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
-  ```bash
-  curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=$HOME/.local/bin sh
-  ```
-- **Blaxel login:** Login to Blaxel platform
-  ```bash
-  bl login YOUR-WORKSPACE
-  ```
-
-## 💻 Installation
-
-**Clone the repository and install dependencies:**
-
-```bash
-git clone https://github.com/blaxel-ai/template-langgraph-py.git
-cd template-langgraph-py
-uv sync
-```
-
-## 🔧 Usage
-
-### Running the Server Locally
-
-Start the development server with hot reloading:
+### Run the agent server (local)
 
 ```bash
 bl serve --hotreload
 ```
 
-_Note:_ This command starts the server and enables hot reload so that changes to the source code are automatically reflected.
-
-### Testing your agent
-
-You can test your agent using the chat interface:
+### Test the agent (CLI)
 
 ```bash
-bl chat --local blaxel-agent
+bl chat --local langgraph-agent
 ```
 
-Or run it directly with specific input:
+## Project Structure
+
+```
+├── src/
+│   ├── main.py           # Entry point
+│   ├── agent.py          # Core agent implementation
+│   └── server/           # FastAPI server
+│       └── ...
+├── examples/             # Usage examples
+├── tests/                # Unit and integration tests
+├── pyproject.toml        # Packaging configuration
+└── README.md
+```
+
+## Usage
+
+### Agent Server
+
+Start the FastAPI server:
 
 ```bash
-bl run agent blaxel-agent --local --data '{"input": "What is the weather in Paris?"}'
+uvicorn src.server:app --reload
 ```
 
-### Deploying to Blaxel
-
-When you are ready to deploy your application:
+Send a request:
 
 ```bash
-bl deploy
+curl -X POST http://localhost:8000/agents/langgraph-agent/run \
+  -H "Content-Type: application/json" \
+  -d '{"input":"What is the weather today in Paris?"}'
 ```
 
-This command uses your code and the configuration files under the `.blaxel` directory to deploy your application.
+### Agent CLI
 
-## 📚 API Reference
-
-The LangGraph agent exposes the following endpoints:
-
-- **POST /agents/{agent_id}/run**: Run the agent with provided input
-  ```json
-  {
-    "input": "What is the weather in Paris?",
-    "stream": true
-  }
-  ```
-
-- **GET /agents/{agent_id}/info**: Get information about the agent capabilities
-- **GET /health**: Health check endpoint
-
-For detailed API documentation, run the server and visit `/docs` endpoint.
-
-## 📁 Project Structure
-
-- **src/main.py** - Application entry point
-- **src/agent.py** - Core agent implementation with LangGraph integration
-- **src/server/** - Server implementation and routing
-- **pyproject.toml** - UV package manager configuration
-- **blaxel.toml** - Blaxel deployment configuration
-
-## 📝 Examples
-
-### Basic Conversation
-
-```
-User: What can you help me with?
-Agent: I can help you with various tasks including:
-- Answering general knowledge questions
-- Checking weather information for locations
-- Searching for information on the web
-- Performing calculations
-- Assisting with creative tasks
-
-How can I assist you today?
+```bash
+# Chat with the agent locally
+dbl chat --local langgraph-agent
 ```
 
-### Weather Query
+## API Reference
 
-```
-User: What's the weather like in San Francisco?
-Agent: Let me check the current weather in San Francisco for you.
+### POST /agents/{agent_id}/run
 
-Current conditions in San Francisco:
-- Temperature: 62°F (16°C)
-- Condition: Partly cloudy
-- Humidity: 75%
-- Wind: 12 mph westerly
+- **Description**: Run the agent with provided input
+- **Request**:
+  - `input` (string): prompt for the agent
+- **Response**:
+  - `stream` (boolean): true if streaming
+  - `output` (string): agent response
 
-The forecast shows mild temperatures continuing through the week with morning fog.
-```
+### GET /agents/{agent_id}/info
 
-## ❓ Troubleshooting
+- **Description**: Get agent metadata and capabilities
+- **Response**:
+  - `tools` (array): list of integrated functions
+  - `model` (string): model used
 
-### Common Issues
+## Contribution
 
-1. **Dependency Issues**:
-   - Make sure you have Python 3.10+
-   - Try `uv sync --upgrade` to update dependencies
+We welcome contributions!
 
-2. **Connection Problems**:
-   - Verify your network connection
-   - Check firewall settings if API calls are failing
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m "Add feature"`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
-For more help, please [submit an issue](https://github.com/blaxel-templates/template-langgraph-py/issues) on GitHub.
+Please follow the [Blaxel Code of Conduct](https://blaxel.ai/code-of-conduct).
 
-## 👥 Contributing
+## Support
 
-Contributions are welcome! Here's how you can contribute:
+For issues or questions, please open an [issue](https://github.com/blaxel-templates/template-langgraph-py/issues) or join our [Discord Community](https://discord.gg/G3mzUPcHP).
 
-1. **Fork** the repository
-2. **Create** a feature branch:
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit** your changes:
-   ```bash
-   git commit -m 'Add amazing feature'
-   ```
-4. **Push** to the branch:
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Submit** a Pull Request
+## License
 
-Please make sure to update tests as appropriate and follow the code style of the project.
-
-## 🆘 Support
-
-If you need help with this template:
-
-- [Submit an issue](https://github.com/blaxel-templates/template-langgraph-py/issues) for bug reports or feature requests
-- Visit the [Blaxel Documentation](https://docs.blaxel.ai) for platform guidance
-- Join our [Discord Community](https://discord.gg/G3NqzUPcHP) for real-time assistance (Replace with actual Discord link)
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
