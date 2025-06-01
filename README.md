@@ -181,15 +181,11 @@ The forecast shows mild temperatures continuing through the week with morning fo
 
 ### Common Issues
 
-1. **API Key Errors**:
-   - Ensure you're logged in with `bl login`
-   - Check that your API keys are properly configured
-
-2. **Dependency Issues**:
+1. **Dependency Issues**:
    - Make sure you have Python 3.10+
    - Try `uv sync --upgrade` to update dependencies
 
-3. **Connection Problems**:
+2. **Connection Problems**:
    - Verify your network connection
    - Check firewall settings if API calls are failing
 
@@ -222,7 +218,7 @@ If you need help with this template:
 
 - [Submit an issue](https://github.com/blaxel-templates/template-langgraph-py/issues) for bug reports or feature requests
 - Visit the [Blaxel Documentation](https://docs.blaxel.ai) for platform guidance
-- Join our [Discord Community](https://discord.gg/example) for real-time assistance (Replace with actual Discord link)
+- Join our [Discord Community](https://discord.gg/G3NqzUPcHP) for real-time assistance (Replace with actual Discord link)
 
 ## 📄 License
 
