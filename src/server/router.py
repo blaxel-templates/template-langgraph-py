@@ -15,4 +15,13 @@ class RequestInput(BaseModel):
 @router.post("/")
 async def handle_request(request: RequestInput):
     with SpanManager("blaxel-langgraph").create_active_span("agent-request", {}):
-        return StreamingResponse(agent(request.inputs), media_type="text/event-stream")
+        # Headers to disable proxy/CDN buffering (CloudFront, nginx, etc.)
+        return StreamingResponse(
+            agent(request.inputs),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache, no-transform",
+                "X-Accel-Buffering": "no",
+                "Connection": "keep-alive",
+            },
+        )
