@@ -1,7 +1,7 @@
 from typing import AsyncGenerator
 
 from blaxel.langgraph import bl_model, bl_tools
-from langchain.tools import tool
+from langchain_core.tools import tool
 from langchain_core.messages import AIMessageChunk
 from langgraph.prebuilt import create_react_agent
 
