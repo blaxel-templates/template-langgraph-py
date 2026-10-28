@@ -3,7 +3,7 @@ name = "template-langgraph-py"
 version = "0.1.0"
 description = ""
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "asgi-correlation-id>=4.3.4",
     "blaxel[langgraph,telemetry]==0.4.18",
@@ -26,4 +26,4 @@ skip-magic-trailing-comma = false
 select = ["E", "F"]
 
 [tool.uv]
-constraint-dependencies = ["fsspec>=2026.6.0"]
+constraint-dependencies = ["fsspec>=2026.6.0", "pillow>=13.0.0"]
