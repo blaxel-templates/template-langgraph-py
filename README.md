@@ -7,7 +7,7 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-powered-brightgreen.svg)](https://github.com/langchain-ai/langgraph)
 [![UV](https://img.shields.io/badge/UV-package_manager-blue.svg)](https://github.com/astral-sh/uv)
 
@@ -64,7 +64,7 @@ bl chat --local blaxel-agent
 
 ## 📋 Prerequisites
 
-- **Python:** 3.10 or later
+- **Python:** 3.11 or later
 - **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
 - **Blaxel Platform Setup:** Complete Blaxel setup by following the [quickstart guide](https://docs.blaxel.ai/Get-started#quickstart)
   - **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
@@ -148,7 +148,7 @@ This command uses your code and the configuration files under the `.blaxel` dire
    - Review tool response formats and error handling
 
 3. **Dependency and Environment Issues**:
-   - Make sure you have Python 3.10+
+   - Make sure you have Python 3.11+
    - Try `uv sync --upgrade` to update dependencies
    - Check for conflicting package versions
    - Verify virtual environment activation
